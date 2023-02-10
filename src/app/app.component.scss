@@ -1,0 +1,13 @@
+.id-meeting {
+    display: table-cell; vertical-align: middle;
+    font-size: 9px;
+}
+
+.meeting {
+    text-align: center;
+    display: table;
+    position: fixed;
+    background-color: lightblue;
+    border: 1px solid black;
+    box-sizing: border-box;
+}

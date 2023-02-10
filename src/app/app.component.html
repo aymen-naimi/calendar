@@ -1,0 +1,8 @@
+<div *ngFor="let meeting of meetingsCss" class="meeting" [ngStyle]="{
+  'width': meeting.width + '%',
+  'margin-left': meeting.marginLeft + '%',
+  'top': meeting.top + '%',
+  'height': meeting.height + 'px'
+}">
+  <span class="id-meeting">{{meeting.id}}</span>
+</div>
