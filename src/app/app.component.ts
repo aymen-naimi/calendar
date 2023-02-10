@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  setNbcolumns(meetingsCss : MeetingCSS[], meetingsEvents: MeetingEvent[]) {
+  setNbcolumns(meetingsCss: MeetingCSS[], meetingsEvents: MeetingEvent[]) {
     meetingsCss.forEach(meet => {
       meet.nbColumns = this.nbColumnsMap.get(meet.id) as number;
       meet.position = 1;
@@ -79,13 +79,13 @@ export class AppComponent implements OnInit {
     while (buffer.length) {
       let newnbcolumns = this.getNewNbColums(oldnbColumns, buffer);
       let buffersIds = this.getBuffersIds(buffer);
-      
+
       buffer.forEach((meet) => {
         if (meet.type === Constants.END) {
           nbColumnsMap.set(meet.id, Math.max(oldnbColumns, inProgessMap.get(meet.id)));
           inProgessMap.delete(meet.id);
         } else if (meet.type === Constants.START) {
-            inProgessMap.set(meet.id, newnbcolumns);
+          inProgessMap.set(meet.id, newnbcolumns);
         }
       });
 
@@ -118,9 +118,9 @@ export class AppComponent implements OnInit {
       if (meeting1.time !== meeting2.time) {
         return meeting1.time - meeting2.time;
       } else if (meeting1.type === meeting2.type) {
-        return 0;
-      } else {
         return (meeting1.type === Constants.START) ? 1 : -1;
+      } else {
+        return 0;
       }
     });
     return meetingsEvents;
@@ -165,11 +165,9 @@ export class AppComponent implements OnInit {
     const array: MeetingEvent[] = JSON.parse(JSON.stringify(meetingsEventsCopy));
     const inProgessMap = new Map();
     let calendarNotValid: boolean = false;
-
-    let buffer: MeetingEvent[] = this.readFromMeetingData(array);
-    while (buffer.length) {
+    let buffer: MeetingEvent[]
+    do {
       buffer = this.readFromMeetingData(array);
-
       buffer.forEach(b => {
         if (b.type === Constants.START) {
           inProgessMap.set(b.id, b);
@@ -178,7 +176,8 @@ export class AppComponent implements OnInit {
         }
       });
       calendarNotValid = calendarNotValid || this.checkIfMapNotValid(inProgessMap);
-    }
+    } while (buffer.length);
+
     return calendarNotValid;
   }
 
