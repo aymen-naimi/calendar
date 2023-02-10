@@ -23,7 +23,6 @@ export interface Meeting {
     position: number;
   }
 
-
   export interface Interval {
     id: number;
     rang: [number, number];
@@ -33,3 +32,4 @@ export interface Meeting {
     public static START ='START';
     public static END ='END';
  }
+ 
