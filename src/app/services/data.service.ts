@@ -132,7 +132,7 @@ export class DataService {
     return meeting.duration * globalHeight / (12 * 60);
   }
 
-  isCalendardisplayNotValid(meetingsEventsCopy: MeetingEvent[]): boolean {
+  isCalendarDisplayNotValid(meetingsEventsCopy: MeetingEvent[]): boolean {
     const array: MeetingEvent[] = JSON.parse(JSON.stringify(meetingsEventsCopy));
     const inProgessMap = new Map();
     let calendarNotValid: boolean = false;

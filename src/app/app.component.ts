@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   meetingsCss: MeetingCSS[] = [];
   meetingsEvents: MeetingEvent[] = [];
   nbColumnsMap: Map<number, number> = new Map();
+  isCalendarReady: boolean = false;
 
   @HostListener('window:resize', ['$event']) onResize(event: any) {
     this.meetingsCss.forEach(meet => {
@@ -31,16 +32,21 @@ export class AppComponent implements OnInit {
   }
 
   initData() {
+    // meetingsCss used to display meetings
     this.meetingsCss = this.dataService.initMeetingsCss(this.meetings);
 
+    // for each meeting we have 2 events (start and end)
     this.meetingsEvents = this.dataService.initMeetingsEvents(this.meetings);
 
+    // nbColumn = n    =>    (width = 100 / n) %
     this.nbColumnsMap = this.dataService.initNbColumnsMap(this.meetingsEvents);
 
     this.dataService.setNbcolumns(this.meetingsCss, this.meetingsEvents, this.nbColumnsMap);
 
-    while (this.dataService.isCalendardisplayNotValid(this.meetingsEvents)) {
+    while (this.dataService.isCalendarDisplayNotValid(this.meetingsEvents)) {
       this.dataService.getNextDisplayPosition(this.meetingsEvents, this.meetingsCss);
     }
+
+    this.isCalendarReady = true;
   }
 }
