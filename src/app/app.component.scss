@@ -1,12 +1,10 @@
 .id-meeting {
-    display: table-cell;
-    vertical-align: middle;
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .meeting {
     text-align: center;
-    display: table;
+    display: grid;
     position: fixed;
     background-color: lightblue;
     border: 1px solid black;
